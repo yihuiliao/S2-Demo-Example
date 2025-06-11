@@ -1,6 +1,5 @@
 import {Avatar, AvatarGroup, ActionButton, Button, ButtonGroup, Link, Tabs, TabList, TabPanel, Tab, Text} from '@react-spectrum/s2'
 import ChevronLeft from '@react-spectrum/s2/icons/ChevronLeft';
-import Play from '@react-spectrum/s2/icons/Play';
 import More from '@react-spectrum/s2/icons/More';
 import Edit from '@react-spectrum/s2/icons/Edit';
 import Add from '@react-spectrum/s2/icons/Add';
@@ -10,7 +9,7 @@ import Globe from '@react-spectrum/s2/icons/GlobeGrid';
 import Prototyping from '@react-spectrum/s2/icons/Prototyping';
 import {iconStyle, baseColor, style} from '@react-spectrum/s2/style' with {type: 'macro'};
 import {container, hstack, vstack} from './macroComplete' with {type: 'macro'};
-import React, {ReactNode} from 'react';
+import React from 'react';
 
 import {Button as RACButton} from 'react-aria-components';
 
@@ -21,7 +20,6 @@ export function S2Components() {
         <div className={style({...hstack(16), alignItems: 'center'})}>
           <ActionButton><ChevronLeft /></ActionButton>
           <h1 className={style({font: "heading-lg", margin: 0})}>May '24 Spring Sale</h1>
-          <ActionButton isQuiet><Play /><Text>TVTube</Text></ActionButton>
         </div>
         <ButtonGroup>
           <Button variant="secondary"><More /></Button>
@@ -124,3 +122,18 @@ function TopCard(props: TopCardProps) {
     </div>
   )
 }
+
+// const SRC_URL_1 =
+//   'https://mir-s3-cdn-cf.behance.net/project_modules/disp/690bc6105945313.5f84bfc9de488.png';
+// const SRC_URL_2 = 'https://i.imgur.com/xIe7Wlb.png';
+
+// function Avatars() {
+//   return (
+//     <AvatarGroup aria-label="Online users">
+//       <Avatar alt="default adobe" src={SRC_URL_1} />
+//       <Avatar alt="default adobe" src={SRC_URL_1} />
+//       <Avatar alt="default adobe" src={SRC_URL_1} />
+//       <Avatar alt="design provided" src={SRC_URL_2} />
+//     </AvatarGroup>
+//     )
+// }

@@ -13,11 +13,13 @@ import More from '@react-spectrum/s2/icons/More';
 import Play from '@react-spectrum/s2/icons/Play';
 import Prototyping from '@react-spectrum/s2/icons/Prototyping';
 import '@react-spectrum/s2/page.css'
+import { S2Components } from './AppComplete';
 
 
 export function App() {
   return (
     <>
+     <S2Components />
     </>
   );
 }
