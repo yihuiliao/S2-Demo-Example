@@ -19,7 +19,6 @@ import { S2Components } from './AppComplete';
 export function App() {
   return (
     <>
-     <S2Components />
     </>
   );
 }
