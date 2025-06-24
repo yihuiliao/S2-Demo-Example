@@ -1,139 +1,82 @@
-import {Avatar, AvatarGroup, ActionButton, Button, ButtonGroup, Link, Tabs, TabList, TabPanel, Tab, Text} from '@react-spectrum/s2'
-import ChevronLeft from '@react-spectrum/s2/icons/ChevronLeft';
-import More from '@react-spectrum/s2/icons/More';
-import Edit from '@react-spectrum/s2/icons/Edit';
+import './App.css';
+import {ActionButton, ButtonGroup, Button, Link} from '@react-spectrum/s2';
 import Add from '@react-spectrum/s2/icons/Add';
-import Lightbulb from '@react-spectrum/s2/icons/Lightbulb';
+import {iconStyle, style} from '@react-spectrum/s2/style' with {type: 'macro'};
 import Briefcase from '@react-spectrum/s2/icons/Briefcase';
+import ChevronLeft from '@react-spectrum/s2/icons/ChevronLeft';
+import {hstack, vstack} from './macro' with {type: 'macro'};
+import Edit from '@react-spectrum/s2/icons/Edit';
 import Globe from '@react-spectrum/s2/icons/GlobeGrid';
+import Lightbulb from '@react-spectrum/s2/icons/Lightbulb';
+import More from '@react-spectrum/s2/icons/More';
 import Prototyping from '@react-spectrum/s2/icons/Prototyping';
-import {iconStyle, baseColor, style} from '@react-spectrum/s2/style' with {type: 'macro'};
-import {container, hstack, vstack} from './macroComplete' with {type: 'macro'};
-import React from 'react';
+import '@react-spectrum/s2/page.css'
 
-import {Button as RACButton} from 'react-aria-components';
-
-export function S2Components() {
-  return (
-    <div className={style({...vstack(8), ...container({variant: "elevated"}), padding: 24})}>
+export function App() {
+  return ( 
+    <div className={style({...vstack(16)})}>
       <div className={style({...hstack(0), justifyContent: 'space-between'})}>
         <div className={style({...hstack(16), alignItems: 'center'})}>
-          <ActionButton><ChevronLeft /></ActionButton>
+          <ActionButton aria-label="Chevron Left"><ChevronLeft /></ActionButton>
           <h1 className={style({font: "heading-lg", margin: 0})}>May '24 Spring Sale</h1>
         </div>
         <ButtonGroup>
-          <Button variant="secondary"><More /></Button>
-          <Button variant="secondary"><Edit /></Button>
-          <Button><Add /></Button>
+          <Button variant="secondary" fillStyle="outline" aria-label="More"><More /></Button>
+          <Button variant="secondary" fillStyle="outline" aria-label="Edit"><Edit /></Button>
+          <Button aria-label="Add"><Add /></Button>
         </ButtonGroup>
       </div>
-      <Tabs aria-label="May Sale Options">
-        <TabList>
-          <Tab id="project">Project</Tab>
-          <Tab id="connections">Connections</Tab>
-        </TabList>
-        <TabPanel id="project">
-          <div className={style({overflowX: 'auto', ...hstack(8)})}>
-            <TopCard icon={<Lightbulb styles={iconStyle({color: 'white'})}/>} iconColor="orange" title="Learn how to use Data Collaboration" description="Find tutorials to help you learn basics, refine your skills, or get inspired" />
-            <TopCard icon={<Briefcase styles={iconStyle({color: 'white'})} />} iconColor="fuchsia" title="All your projects in one place" description="Never lose track of your progress, each project has a home page where you can see the key details." />
-            <TopCard icon={<Globe styles={iconStyle({color: 'white'})} />} iconColor="green" title="Connect with Publishers" description="Find new publishers to collaborate by exploring a catalog of Publishers ready-to-connect." />
-            <TopCard icon={<Prototyping styles={iconStyle({color: 'white'})} />} iconColor="indigo" title="Collaborate to get the most" description="Find tutorials to help you learn basics, refine your skills, or get inspired" />     
-          </div>
-        </TabPanel>
-        <TabPanel id="connections">
-          Random Text
-        </TabPanel>
-      </Tabs>
-      <CustomButton>Hello</CustomButton>
-      <CustomButton isSubtle>Subtle</CustomButton>
+      <div className={style({...hstack(16), overflowX: 'auto'})}>
+        <TopCard icon={<Lightbulb styles={iconStyle({color: 'white'})} />} background="orange" title="Learn how to use Data Collaboration" description="Find tutorials to help you learn basics, refine your skills, or get inspired" />
+        <TopCard icon={<Briefcase styles={iconStyle({color: 'white'})} />} background="fuchsia" title="All your projects in one place" description="Never lose track of your progress, each project has a home page where you can see the key details." />
+        <TopCard icon={<Globe styles={iconStyle({color: 'white'})} />} background="green" title="Connect with Publishers" description="Find new publishers to collaborate by exploring a catalog of Publishers ready-to-connect." />
+        <TopCard icon={<Prototyping styles={iconStyle({color: 'white'})} />} background="indigo" title="Collaborate to get the most" description="Find tutorials to help you learn basics, refine your skills, or get inspired" />     
+      </div>
     </div>
   );
-}
-
-interface CustomButtonProps {
-  children: React.ReactNode,
-  isSubtle?: boolean
-}
-
-const buttonStyles = style({
-  borderRadius: 'pill',
-  color: {
-    default: 'gray-25',
-    isSubtle: 'neutral'
-  },
-  backgroundColor: {
-    default: baseColor('green'),
-    isSubtle: baseColor('green-200')
-  },
-  width: 'min',
-  paddingY: 4,
-  paddingX: 12,
-  borderStyle: 'solid',
-  borderColor: {
-    default: baseColor('green-900'),
-    isSubtle: baseColor('green-200')
-  }
-})
-
-function CustomButton(props: CustomButtonProps) {
-  let {
-    children,
-    isSubtle
-  } = props;
-
-  return (
-    <RACButton className={(renderProps) => buttonStyles({...renderProps, isSubtle})}>
-      {children}
-    </RACButton>
-  )
-}
-
+} 
 interface TopCardProps {
   icon: React.ReactNode,
-  iconColor: string,
+  background: 'orange' | 'fuchsia' | 'green' | 'indigo',
   title: string,
   description: string
 }
+
+const containerStyles = style({
+  backgroundColor: 'layer-1',
+  padding: 24,
+  width: 340,
+  borderRadius: 'default',
+  flexShrink: 0,
+  ...vstack(16)
+})
+
+
 function TopCard(props: TopCardProps) {
   return (
-    <div className={style({width: 340, ...container(), ...vstack(16), flexShrink: 0})}>
+    <div className={containerStyles}> 
       <div className={style({
         backgroundColor: {
-          iconColor: {
+          background: {
             orange: 'orange-600',
-            fuchsia: 'fuchsia-1000',
+            fuchsia: 'fuchsia',
             green: 'green-600',
             indigo: 'indigo-600'
           }
         },
-        size: 48,
+        size: 48, 
+        borderRadius: 'default',
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 'default'
-      })({iconColor: props.iconColor})}>
+        alignItems: 'center'
+      })({background: props.background})}>
         {props.icon}
       </div>
       <div className={style({...vstack(8)})}>
-        <h4 className={style({font: "heading-sm", margin: 0})}>{props.title}</h4>
-        <p className={style({font: 'body', margin: 0})}>{props.description}</p>
+        <h4 className={style({font: "heading-xs", margin: 0})}>{props.title}</h4>
+        <p className={style({font: "body-sm", margin: 0})}>{props.description}</p>
         <Link isQuiet isStandalone>Learn more</Link>
       </div>
     </div>
   )
 }
-
-// const SRC_URL_1 =
-//   'https://mir-s3-cdn-cf.behance.net/project_modules/disp/690bc6105945313.5f84bfc9de488.png';
-// const SRC_URL_2 = 'https://i.imgur.com/xIe7Wlb.png';
-
-// function Avatars() {
-//   return (
-//     <AvatarGroup aria-label="Online users">
-//       <Avatar alt="default adobe" src={SRC_URL_1} />
-//       <Avatar alt="default adobe" src={SRC_URL_1} />
-//       <Avatar alt="default adobe" src={SRC_URL_1} />
-//       <Avatar alt="design provided" src={SRC_URL_2} />
-//     </AvatarGroup>
-//     )
-// }
